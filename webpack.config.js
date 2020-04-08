@@ -46,6 +46,16 @@ module.exports = {
                 }
             },
             {
+                test: /\.(obj)$/,
+                use: {
+                    loader: "file-loader",
+                    options: {
+                        name: "[name].[hash:8].[ext]",
+                        outputPath: "models/"
+                    }
+                }
+            },
+            {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/,
                 use: {

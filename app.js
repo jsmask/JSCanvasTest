@@ -1,4 +1,4 @@
 
 import "@css/style.css"
 
-require("./view/20.3d基础光源场景");
+require("./view/22.物质资源切换");
