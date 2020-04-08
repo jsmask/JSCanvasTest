@@ -1,4 +1,4 @@
 
 import "@css/style.css"
 
-require("./view/22.物质资源切换");
+require("./view/22.3d物体切换");
