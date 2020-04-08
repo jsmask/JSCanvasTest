@@ -1,0 +1,29 @@
+{
+    "plugins": [
+        [
+            "@babel/plugin-transform-runtime",
+            {
+              "corejs": false,
+              "helpers": true,
+              "regenerator": true,
+              "useESModules": false
+            }
+        ]
+    ],
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "targets": {
+                    "chrome": 53,
+                    "browsers": [
+                        "last 2 versions",
+                        "safari 7",
+                        "android >= 4.0",
+                        "ie >= 8"
+                    ]
+                }
+            }
+        ]
+    ]
+}

@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.ipt {
+    width: 200px;
+    height: 36px;
+    border: 1px solid #999999;
+    outline: none;
+    box-sizing: border-box;
+    padding: 0 5px;
+}
+.btn{
+    border: 1px solid #7894e4;
+    width: 120px;
+    height: 36px;
+    font-size: 14px;
+    cursor: pointer;
+    background: #7894e4;
+    color: #ffffff;
+}
