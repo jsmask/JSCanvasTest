@@ -1,4 +1,4 @@
 
 import "@css/style.css"
 
-require("./view/22.3d物体切换");
+require("./view/23.粒子像素画");
