@@ -41,6 +41,7 @@ import jg1 from '../public/images/jiegeng1.jpg'
                 ctx.clearRect(0, 0, w, h);
                 loadImg(src).then(img => {
                     ctx.drawImage(img, 0, 0, w, h);
+
                     checkPX().then(b => {
                         ctx.clearRect(0, 0, w, h);
                         balls[index] = b;
@@ -50,7 +51,6 @@ import jg1 from '../public/images/jiegeng1.jpg'
                 });
                 ctx.restore();
             })
-
         }
 
         function checkPX() {
