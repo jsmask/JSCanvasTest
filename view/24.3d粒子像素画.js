@@ -5,8 +5,6 @@ import dat from "../public/src/dat.gui";
 import { rp,randomColor,loadImg } from "../src/untils";
 import jg0 from '../public/images/jiegeng0.jpg'
 
-require('three/examples/js/loaders/OBJLoader');
-
 window.addEventListener("load", init);
 
 
@@ -99,24 +97,65 @@ function init() {
     let group = new THREE.Group();
     group.rotation.x = -1 * Math.PI;
 
-    let arr = [];
+    let geom = new THREE.Geometry();  
+    let material = new THREE.PointsMaterial({
+        size:3.6,
+        vertexColors:true,
+        color:0xffffff
+    });
+    let type = 1;
 
+    let arr = [];
     imgData(jg0).then(data=>{
+        console.time();
         data.forEach((item,index)=>{
-            let sprite = new THREE.Sprite(new THREE.SpriteMaterial({
-                color:new THREE.Color(item.color)
-            }));
-            sprite.scale.set(1.8,1.8,10);
-            arr[index] = {
-                x:item.x-100,
-                y:item.y-75,
-                z:0,
-                complate:false
+            if(type==0){
+                // Sprite 粒子
+                createSprite(item,index);
             }
-            sprite.position.set(rp([-1000,1000]),rp([-1000,1000]),rp([-1000,1000]));
-            group.add(sprite);
+            else{
+                // Points 粒子
+                createSpriteX(item,index)
+            }
         })
+        
+        if(type == 1){
+            let box = new THREE.Points(geom,material);
+            group.add(box);
+        }
+
+        console.timeEnd();
+        
     })
+
+    function createSprite(item,index){
+        type = 0;
+        let sprite = new THREE.Sprite(new THREE.SpriteMaterial({
+            color:new THREE.Color(item.color)
+        }));
+        sprite.scale.set(1.8,1.8,10);
+        arr[index] = {
+            x:item.x-100,
+            y:item.y-75,
+            z:0,
+            complate:false
+        }
+        sprite.position.set(rp([-1000,1000]),rp([-1000,1000]),rp([-1000,1000]));
+        group.add(sprite);
+    }
+
+    function createSpriteX(item,index){
+        type = 1  
+        let v3 = new THREE.Vector3(rp([-1000,1000]),rp([-1000,1000]),rp([-1000,1000])); 
+        geom.vertices.push(v3);
+        geom.colors.push(new THREE.Color(item.color));
+        arr[index] = {
+            x:item.x-100,
+            y:item.y-75,
+            z:0,
+            complate:false
+        }
+    }
 
     scene.add(group);
 
@@ -131,9 +170,25 @@ function init() {
     let step = 0,is_rotation=false,progress = 0,dt = 0;
 
     function move(mesh,i){
-        let dx =  arr[i].x - mesh.position.x;
-        let dy = arr[i].y - mesh.position.y;
-        let dz = arr[i].z - mesh.position.z;
+        if(mesh instanceof THREE.Points){
+            mesh.geometry.vertices.forEach(move);
+            mesh.geometry.verticesNeedUpdate = true;
+            return;
+        }
+        let tx = 0,ty = 0,tz = 0;
+        if(mesh instanceof THREE.Vector3){
+            tx = mesh.x;
+            ty = mesh.y;
+            tz = mesh.z;
+        }else{
+            tx = mesh.position.x;
+            ty = mesh.position.y;
+            tz = mesh.position.z;
+        }
+
+        let dx =  arr[i].x - tx;
+        let dy = arr[i].y - ty;
+        let dz = arr[i].z - tz;
         let swing = 0.025;
 
         if(dx<0.01&&dx>-0.01 && dy<0.01&&dy>-0.01 && dz<0.01&&dz>-0.01 && !arr[i].complate){
@@ -144,9 +199,16 @@ function init() {
             }
         }
 
-        mesh.position.x += dx *swing;
-        mesh.position.y += dy *swing;
-        mesh.position.z += dz *swing;
+        if(mesh instanceof THREE.Vector3){
+            mesh.x += dx *swing;
+            mesh.y += dy *swing;
+            mesh.z += dz *swing;
+        }
+        else{
+            mesh.position.x += dx *swing;
+            mesh.position.y += dy *swing;
+            mesh.position.z += dz *swing;
+        }
         
     }
 
@@ -157,7 +219,8 @@ function init() {
 
         dt++;
 
-        if(dt>300){
+        if(dt>100){
+            dt = 100;
             group.children.forEach(move);
         }
         else{
