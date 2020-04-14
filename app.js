@@ -1,4 +1,4 @@
 
 import "@css/style.css"
 
-require("./view/25.移动中的大雄");
+require("./view/26.3d高级几何点云");

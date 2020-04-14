@@ -18,10 +18,13 @@ function init() {
     let scene = new THREE.Scene();
     let sceneOrtho = new THREE.Scene();
     let camera = new THREE.PerspectiveCamera(50, W / H, 0.1, maxZ);
-    let cameraOrtho = new THREE.OrthographicCamera(0, window.innerWidth, window.innerHeight, 0, -10, 10);
+    let cameraOrtho = new THREE.OrthographicCamera(-10, 10,10, -10, -10, 10);
 
     camera.position.set(0, 0, 10);
     camera.lookAt(scene.position);
+    
+    cameraOrtho.position.set(0,0,0);
+    cameraOrtho.lookAt(sceneOrtho.position);
 
     window.addEventListener("resize", () => {
         W = window.innerWidth;
@@ -57,8 +60,8 @@ function init() {
         matalial.blending = THREE.AdditiveBlending;
         matalial.depthTest = false;
         let sprite = new THREE.Sprite(matalial);
-        sprite.position.set(x, y, 0);
-        sprite.scale.set(1, 1.3, 1);
+        sprite.position.set(x,y,0);
+        sprite.scale.set(1, 1.7, 1);
         sprite.type = type;
         sprite.speed = speed;
         // 4 上 1下 3右 2左
@@ -89,11 +92,11 @@ function init() {
 
     scene.add(ball);
 
-    scene.add(daxiong);
-    scene.add(jingxiang);
-    scene.add(xiaofu);
-    scene.add(panghu);
-    scene.add(dlam);
+    sceneOrtho.add(daxiong);
+    sceneOrtho.add(jingxiang);
+    sceneOrtho.add(xiaofu);
+    sceneOrtho.add(panghu);
+    sceneOrtho.add(dlam);
 
     let trackballControls = initTrackballControls(camera, renderer);
     let clock = new THREE.Clock();
@@ -112,10 +115,10 @@ function init() {
 
         dt++;
 
-        ball.position.x = 5 * Math.cos(dt/50);
-        ball.position.y = 5 * Math.sin(dt/50);
+        camera.position.x = 6 * Math.cos(dt/10);
+        camera.position.y = 6 * Math.sin(dt/10);
 
-        scene.traverse(mesh => {
+        sceneOrtho.traverse(mesh => {
             if (mesh instanceof THREE.Sprite) {
 
                 if (dt % 8 == 0) {
@@ -155,8 +158,8 @@ function init() {
 
         requestAnimationFrame(run);
         renderer.render(scene, camera);
-        // renderer.autoClear = false;
-        // renderer.render(sceneOrtho, cameraOrtho);
+        renderer.autoClear = false;
+        renderer.render(sceneOrtho, cameraOrtho);
     })();
 
     function initStats(type = 0) {
