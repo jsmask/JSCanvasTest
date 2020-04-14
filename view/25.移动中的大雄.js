@@ -153,9 +153,6 @@ function init() {
             }
         })
 
-
-
-
         requestAnimationFrame(run);
         renderer.render(scene, camera);
         // renderer.autoClear = false;
