@@ -47,7 +47,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.(obj|mtl|blend|json)$/,
+                test: /\.(obj|mtl|blend|json|pdb)$/,
                 use: {
                     loader: "file-loader",
                     options: {
