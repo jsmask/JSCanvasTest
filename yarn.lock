@@ -4810,6 +4810,11 @@ terser@^4.1.2:
     source-map "~0.6.1"
     source-map-support "~0.5.12"
 
+three-obj-mtl-loader@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npm.taobao.org/three-obj-mtl-loader/download/three-obj-mtl-loader-1.0.3.tgz#2901efd5b77cce29b61733c63f196432ee653667"
+  integrity sha1-KQHv1bd8zim2FzPGPxlkMu5lNmc=
+
 three@^0.115.0:
   version "0.115.0"
   resolved "https://registry.npm.taobao.org/three/download/three-0.115.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fthree%2Fdownload%2Fthree-0.115.0.tgz#540d800c381b9da2334c024f0fbe4d23f84eb05e"

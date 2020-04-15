@@ -42,17 +42,17 @@ module.exports = {
                     loader: "file-loader",
                     options: {
                         name: "[name].[hash:8].[ext]",
-                        outputPath: "images/"
+                        outputPath: "public/images/"
                     }
                 }
             },
             {
-                test: /\.(obj)$/,
+                test: /\.(obj|mtl|blend|json)$/,
                 use: {
                     loader: "file-loader",
                     options: {
                         name: "[name].[hash:8].[ext]",
-                        outputPath: "models/"
+                        outputPath: "public/models/"
                     }
                 }
             },
@@ -77,6 +77,7 @@ module.exports = {
                 collapseWhitespace: true,
                 minifyCSS: true
             },
+            
         })
     ]
 };

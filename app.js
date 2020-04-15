@@ -1,4 +1,4 @@
 
 import "@css/style.css"
 
-require("./view/26.3d高级几何点云");
+require("./view/24.3d粒子像素画");
