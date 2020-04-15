@@ -1,4 +1,4 @@
 
 import "@css/style.css"
 
-require("./view/24.3d粒子像素画");
+require("./view/27.3d蝴蝶OBJ模型");
