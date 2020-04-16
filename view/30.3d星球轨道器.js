@@ -10,8 +10,6 @@ require("three/examples/js/controls/OrbitControls")
 
 window.addEventListener("load", init);
 
-
-
 function init() {
     const app = document.getElementById("app");
     let W, H, maxZ = 1500;
