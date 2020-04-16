@@ -66,7 +66,6 @@ function init() {
     ; (function run() {
         orbitControls.update(clock.getDelta());
         stats.update();
-        
 
         requestAnimationFrame(run);
         renderer.render(scene, camera);
