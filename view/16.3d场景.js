@@ -6,6 +6,8 @@ import {
     Mesh, BoxGeometry, SphereGeometry, Color, Vector2,
     TextureLoader, MeshLambertMaterial, Clock
 } from 'three';
+require("three/examples/js/renderers/Projector")
+
 
 import skin_cube from '../public/images/3d/crate.gif';
 import Stats from '../public/src/Stats';
@@ -36,7 +38,7 @@ function init() {
     light.castShadow = true;
     light.shadow.camera.far = 130;
     light.shadow.camera.near = 40;
-    light.shadow.mapSize = new Vector2(1024, 1024);
+    light.shadow.mapSize = new Vector2(2048, 2048);
     light.position.set(-40, 60, 0);
 
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -81,24 +83,40 @@ function init() {
     camera.lookAt(scene.position);
 
 
+    let projector =new THREE.Projector();
+    app.addEventListener("mousedown",function(e){
+        let v3 = new THREE.Vector3((e.clientX/W)*2-1,-(e.clientY/H)*2+1,0.5);
+        v3 = v3.unproject(camera);
+        let raycaster = new THREE.Raycaster(camera.position,v3.sub(camera.position).normalize());
+        let intersects = raycaster.intersectObjects([sphere,cube])
+        if(intersects.length>0){
+            intersects[0].object.material.transparent = !intersects[0].object.material.transparent;
+            intersects[0].object.material.opacity = intersects[0].object.material.opacity == 1 ? 0.5:1;
+        }
+    },false)
+    
+
+
     let stats = initStats();
     let step = 0;
 
     let controls = new function () {
         this.rotationSpeed = 0.02;
         this.bouncingSpeed = 0.03;
+        this.enabled = false;
     }
 
     let gui = new dat.GUI();
     gui.add(controls, "rotationSpeed", 0, 0.5);
     gui.add(controls, "bouncingSpeed", 0, 0.5);
-
+    gui.add(controls, "enabled");
 
     let trackballControls = initTrackballControls(camera, renderer);
     let clock = new Clock();
 
     ; (function run() {
         trackballControls.update(clock.getDelta());
+        trackballControls.enabled = controls.enabled;
         stats.update();
 
         step += controls.bouncingSpeed;
@@ -128,9 +146,10 @@ function init() {
         trackballControls.panSpeed = 0.8;
         trackballControls.noZoom = false;
         trackballControls.noPan = false;
-        trackballControls.staticMoving = true;
+        trackballControls.staticMoving = false;
         trackballControls.dynamicDampingFactor = 0.3;
         trackballControls.keys = [65, 83, 68];
+        console.log(trackballControls)
         return trackballControls;
     }
 

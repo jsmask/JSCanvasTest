@@ -1,4 +1,4 @@
 
 import "@css/style.css"
 
-require("./view/28.3d钻石分子结构");
+require("./view/30.3d星球轨道器");
