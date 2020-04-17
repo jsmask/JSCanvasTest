@@ -6,6 +6,8 @@ import { setMaterialGroup } from "../src/untils";
 import floor_wood from '../public/images/3d/general/floor-wood.jpg';
 import cube_wood from "../public/images/3d/crate.gif";
 import sphere_lava from '../public/images/3d/emissive/lava.png';
+import sphere_normal_lava from '../public/images/3d/emissive/lava-normals.png';
+import sphere_metalness_lava from '../public/images/3d/emissive/lava-smoothness.png';
 import plane_wood from '../public/images/3d/general/wood-2.jpg';
 import gopher_obj from "../public/models/gopher/gopher.obj";
 require('three/examples/js/loaders/OBJLoader');
@@ -79,11 +81,17 @@ function init() {
 
     //岩浆球体
     let sphere_skin = new THREE.TextureLoader().load(sphere_lava);
-    let sphere = new THREE.Mesh(new THREE.SphereGeometry(15), new THREE.MeshStandardMaterial({
+    let sphere_normal_skin = new THREE.TextureLoader().load(sphere_normal_lava);
+    let sphere_metalness_skin = new THREE.TextureLoader().load(sphere_metalness_lava);
+    let sphere = new THREE.Mesh(new THREE.SphereGeometry(15,50,50), new THREE.MeshStandardMaterial({
         color: 0xFFFFFF,
-        map: sphere_skin,
-        metalness:0.3,
-        roughness:1
+        emissive: 0xFFFFFF,
+        emissiveMap: sphere_skin,
+        normalMap:sphere_normal_skin,
+        // metalnessMap: sphere_metalness_skin,
+        metalness: 1,
+        roughness:0.4,
+        normalScale: new THREE.Vector2(4,4)
     }));
     sphere.receiveShadow = true;
     sphere.castShadow = true;
@@ -128,12 +136,18 @@ function init() {
 
     let DatControls = function () {
         this.selectedMesh = "木箱";
+        this.lightIntensity = 1;
     };
     let controls = new DatControls();
     let gui = new dat.GUI();
 
     let mainMesh = cube;
     scene.add(mainMesh);
+
+    spotLight.intensity = controls.lightIntensity;
+    gui.add(controls,"lightIntensity",0,2,0.01).onChange(e=>{
+        spotLight.intensity = e
+    })
 
     loadGopher().then(gopher => {
         gopher.position.set(0, 25, 0);

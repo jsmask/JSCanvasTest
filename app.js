@@ -1,4 +1,4 @@
 
 import "@css/style.css"
 
-require("./view/31.3d萨尔萨舞");
+require("./view/32.3d车内的金属球");
