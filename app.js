@@ -1,4 +1,4 @@
 
 import "@css/style.css"
 
-require("./view/31.3d机器人萨尔萨舞");
+require("./view/31.3d萨尔萨舞");
