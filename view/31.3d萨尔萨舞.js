@@ -6,6 +6,13 @@ import { rp, randomColor, loadImg } from "../src/untils";
 require("three/examples/js/controls/TrackballControls");
 require("three/examples/js/loaders/FBXLoader");
 
+import right from "../public/images/3d/cubemap/colloseum/right.png"
+import left from "../public/images/3d/cubemap/colloseum/left.png"
+import top from "../public/images/3d/cubemap/colloseum/top.png"
+import bottom from "../public/images/3d/cubemap/colloseum/bottom.png"
+import front from "../public/images/3d/cubemap/colloseum/front.png"
+import back from "../public/images/3d/cubemap/colloseum/back.png"
+
 import floor from "../public/images/3d/general/bathroom.jpg"
 import salsa from "../public/models/salsa/salsa.fbx"
 import { Zlib } from "../public/src/inflate.min.js"
@@ -28,6 +35,12 @@ function init() {
     spotLight.shadow.mapSize.width = 2048;
     spotLight.shadow.mapSize.height = 2048;
     scene.add(spotLight);
+
+
+    var urls = [right,left,top,bottom,front,back];
+  
+    var cubeLoader = new THREE.CubeTextureLoader();
+    scene.background = cubeLoader.load(urls);
 
     // let lightHelper = new THREE.SpotLightHelper(spotLight);
     // scene.add(lightHelper)
