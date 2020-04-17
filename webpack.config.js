@@ -47,7 +47,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.(obj|mtl|blend|json|pdb|sea|ply)$/,
+                test: /\.(obj|mtl|blend|json|pdb|sea|ply|fbx)$/,
                 use: {
                     loader: "file-loader",
                     options: {
@@ -58,7 +58,7 @@ module.exports = {
             },
             {
                 test: /\.jsx?$/,
-                exclude: /(node_modules|bower_components)/,
+                exclude: /(node_modules|bower_components|public)/,
                 use: {
                     loader: 'babel-loader'
                 }
@@ -72,6 +72,7 @@ module.exports = {
             favicon: "./public/favicon.ico",
             filename: "index.html",
             template: "./public/index.html",
+            chunks:["main"],
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,

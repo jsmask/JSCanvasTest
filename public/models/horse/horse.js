@@ -1,4 +1,4 @@
-{
+module.exports = {
 
     "metadata" : {
 		"formatVersion" : 3,
