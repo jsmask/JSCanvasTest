@@ -14,7 +14,6 @@ import back_map from "../public/images/3d/cubemap/car/back.png"
 
 import roughness_map from "../public/images/3d/engraved/roughness-map.jpg"
 
-
 window.addEventListener("load", init);
 
 function init() {
@@ -24,8 +23,9 @@ function init() {
     let scene = new THREE.Scene();
     let camera = new THREE.PerspectiveCamera(50, W / H, 0.1, maxZ);
 
-    let cubeLoader = new THREE.CubeTextureLoader();
-    scene.background = cubeLoader.load([right_map,left_map,top_map,bottom_map,front_map,back_map]);
+    let cubeBox = new THREE.CubeTextureLoader().load([right_map,left_map,top_map,bottom_map,front_map,back_map]);
+    // cubeBox.mapping = THREE.CubeRefractionMapping
+    scene.background = cubeBox;
 
     let ambientLight = new THREE.AmbientLight(0x888888);
     scene.add(ambientLight);
@@ -59,6 +59,12 @@ function init() {
     renderer.setClearColor(new THREE.Color(0x000000));
     renderer.shadowMap.enabled = true;
     app.append(renderer.domElement);
+
+    let watch_ball = new THREE.Mesh(new THREE.SphereGeometry(0.5,10,10),new THREE.MeshBasicMaterial({
+        color:0xc2e070
+    }));
+    watch_ball.position.set(0,0,0);
+    scene.add(watch_ball);
 
     let ball0 = new THREE.Mesh(new THREE.SphereGeometry(10,100,100),new THREE.MeshStandardMaterial({
         color: 0xffffff,
@@ -94,10 +100,28 @@ function init() {
     let controls = new DatControls();
     let gui = new dat.GUI();
 
+    let step = 0,invert=1;
+
     ; (function run() {
         let delta = clock.getDelta();
         trackballControls.update(delta);
         stats.update();
+
+        if(step>2*Math.PI){
+            step -= 2*Math.PI;
+            invert *= -1;
+        }
+        else{
+            step += 0.02;
+        }
+
+        watch_ball.position.x = 70*Math.cos(step)/4 - 70/4;
+        watch_ball.position.z = 70*Math.sin(step)/2;
+
+        watch_ball.position.x *= invert;
+
+
+        pointLight.position.copy(watch_ball.position)
 
         requestAnimationFrame(run);
         renderer.render(scene, camera);

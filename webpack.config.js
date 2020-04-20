@@ -47,6 +47,16 @@ module.exports = {
                 }
             },
             {
+                test: /\.(mp4|ogv)$/,
+                use: {
+                    loader: "file-loader",
+                    options: {
+                        name: "[name].[hash:8].[ext]",
+                        outputPath: "public/other/"
+                    }
+                }
+            },
+            {
                 test: /\.(obj|mtl|blend|json|pdb|sea|ply|fbx)$/,
                 use: {
                     loader: "file-loader",
