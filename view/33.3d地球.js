@@ -187,7 +187,6 @@ function init() {
     dotScreenPass.add(dotScreenControls, "scale", 0, 3.14, 0.01).onChange(e => effectDotScreen.uniforms["scale"].value = e);
     dotScreenPass.add(dotScreenControls, "centerX", 0, 5, 0.01).onChange(e => effectDotScreen.uniforms["center"].value = new THREE.Vector2(e, dotScreenControls.centerY));
     dotScreenPass.add(dotScreenControls, "centerY", 0, 5, 0.01).onChange(e => effectDotScreen.uniforms["center"].value = new THREE.Vector2(dotScreenControls.centerX, e));
-    //uniforms
 
 
     composer4.addPass(renderPass);

@@ -1,4 +1,4 @@
 
 import "@css/style.css"
 
-require("./view/33.3d地球");
+require("./view/35.3d地球与火星");
