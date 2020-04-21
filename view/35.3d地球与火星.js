@@ -106,12 +106,13 @@ function init() {
     let clearMask = new THREE.ClearMaskPass();
     let earthMask = new THREE.MaskPass(sceneEarth, camera);
     let marsMask = new THREE.MaskPass(sceneMars, camera);
-
+    //inverse 蒙层翻转
+    //earthMask.inverse = true;
 
     let effectSepia = new THREE.ShaderPass(THREE.SepiaShader);
     effectSepia.uniforms['amount'].value = 0.8;
     let effectColorify = new THREE.ShaderPass(THREE.ColorifyShader);
-    let effectColor = "rgb(200,70,40)";
+    let effectColor = "rgb(220,75,45)";
     effectColorify.uniforms['color'].value = new THREE.Color(effectColor);
 
     let trackballControls = new THREE.TrackballControls(camera, renderer.domElement);

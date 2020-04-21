@@ -1,4 +1,4 @@
 
 import "@css/style.css"
 
-require("./view/35.3d地球与火星");
+require("./view/36.3d深景");
