@@ -4,13 +4,23 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
     entry: {
-        main:'./app.js'
+        main:'./app.js',
+        // ammo:'./lib/ammo.js',
+        physijs_worker:'./lib/physijs_worker.js'
     },
     output: {
         filename: (chunkData) => {
             return chunkData.chunk.name === 'main' ? '[name].[chunkhash:8].js' : '[name].js';
         },
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        //globalObject: "this"
+    },
+    // externals:{
+    //     "physijs_worker": 'public/src/lib/physijs_worker.js',
+    //     "ammo": 'public/src/lib/ammo.js'
+    // },
+    node: {
+        fs: 'empty'
     },
     resolve: {
         alias: {
@@ -18,7 +28,7 @@ module.exports = {
             "@css": '@/public/css',
             "@images": '@/public/images',
             "@fonts": '@/public/fonts',
-            "@src": "@/src"
+            "@src": "@/src",
         }
     },
     devServer: {
@@ -68,7 +78,7 @@ module.exports = {
             },
             {
                 test: /\.jsx?$/,
-                exclude: /(node_modules|bower_components|public)/,
+                exclude: /(node_modules|bower_components|public|lib)/,
                 use: {
                     loader: 'babel-loader'
                 }
