@@ -57,7 +57,7 @@ function init() {
     // let lightHelper = new THREE.SpotLightHelper(spotLight);
     // scene.add(lightHelper);
 
-    camera.position.set(0, 65, 70);
+    camera.position.set(0, 75, 90);
     camera.lookAt(scene.position);
 
     window.addEventListener("resize", () => {
@@ -78,9 +78,9 @@ function init() {
 
     let tweenData = { scale: 1}  
     let tween = new TWEEN.Tween(tweenData).to({scale: 0.75}, 1000); 
-    tween.easing(TWEEN.Easing.Cubic.Out);    
+    tween.easing(TWEEN.Easing.Back.InOut);    
     let tweenBack = new TWEEN.Tween(tweenData).to({scale: 1}, 1000); 
-    tweenBack.easing(TWEEN.Easing.Cubic.In); 
+    tweenBack.easing(TWEEN.Easing.Elastic.InOut); 
 
     console.log(TWEEN.Easing)
     
@@ -143,6 +143,7 @@ function init() {
                 mesh.scale.set(0.5*tweenData.scale,0.5*tweenData.scale,0.5*tweenData.scale);
                 mesh.position.z = Math.cos(step)*10;
                 mesh.position.y = 20 + Math.sin(step)*10;
+                mesh.rotation.z = step;
             }
         })
 
