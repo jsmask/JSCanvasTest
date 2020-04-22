@@ -48,11 +48,23 @@ module.exports = {
             },
             {
                 test: /\.(jpe?g|gif|svg|png)$/,
+                exclude: /(models)/,
                 use: {
-                    loader: "file-loader",
+                    loader: "file-loader",                    
                     options: {
                         name: "[name].[hash:8].[ext]",
                         outputPath: "public/images/"
+                    }
+                }
+            },
+            {
+                test: /\.(jpe?g|gif|svg|png)$/,
+                include: /(models)/,
+                use: {
+                    loader: "file-loader",                    
+                    options: {
+                        name: "[name].[ext]",
+                        outputPath: "public/models/pic"
                     }
                 }
             },

@@ -10,8 +10,10 @@ require("three/examples/js/loaders/FBXLoader");
 
 import floor from "../public/images/3d/general/bathroom.jpg"
 import salsa from "../public/models/salsa/salsa.fbx"
+
 import { Zlib } from "../public/src/inflate.min.js"
 window.Zlib = Zlib;
+
 window.addEventListener("load", init);
 
 function init() {

@@ -1,3 +1,3 @@
 import "@css/style.css"
 
-require("./view/37.3d多米诺骨牌");
+require("./view/38.3d章鱼fbx模型");

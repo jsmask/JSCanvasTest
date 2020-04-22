@@ -40,8 +40,8 @@ function init() {
     spotLight.shadow.mapSize = new THREE.Vector2(2048, 2048);
     scene.add(spotLight);
 
-    let lightHelper = new THREE.SpotLightHelper(spotLight);
-    scene.add(lightHelper);
+    // let lightHelper = new THREE.SpotLightHelper(spotLight);
+    // scene.add(lightHelper);
 
 
     // let cubeBg = new THREE.CubeTextureLoader().load([right_map, left_map, top_map, bottom_map, front_map, back_map]);
@@ -66,17 +66,17 @@ function init() {
 
 
     
-    scene.setGravity(new THREE.Vector3(0, -150, 0));
+    scene.setGravity(new THREE.Vector3(0, -100, 0));
     createGroundAndWalls();
     let points = getPoints();
     var stones = [];
     var colors = ["#2d85f0","#f4433c","#ffbc32","#0aa858"];
     points.forEach((point, index)=>{
-        let stoneGeom = new THREE.BoxGeometry(0.6, 6, 2);
+        let stoneGeom = new THREE.BoxGeometry(0.5, 6, 2);
         let stone = new Physijs.BoxMesh(stoneGeom, Physijs.createMaterial(new THREE.MeshStandardMaterial({
           color: new THREE.Color(colors[index % colors.length]), 
           transparent: true, 
-          opacity: 0.9
+          opacity: 0.85
         })));
     
         stone.position.copy(point);
@@ -99,14 +99,15 @@ function init() {
         let r = 30;
         let cX = -2;
         let cY = -2;
+        let v = 0.6;
       
         var circleOffset = 0;
-        for (var i = 0; i < 900; i += 6 + circleOffset) {
+        for (var i = 0; i < 1200; i += 6 + circleOffset) {
       
             circleOffset = 4.5 * (i / 360);
 
-            let x = (r / 1440) * (1440 - i) * Math.cos(i * (Math.PI / 180)) + cX;
-            let z = (r / 1440) * (1440 - i) * Math.sin(i * (Math.PI / 180)) + cY;
+            let x = (r - i/r*v) * Math.cos(i * (Math.PI / 180)) + cX;
+            let z = (r - i/r*v) * Math.sin(i * (Math.PI / 180)) + cY;
             let y = 0;
       
             points.push(new THREE.Vector3(x, y, z));
