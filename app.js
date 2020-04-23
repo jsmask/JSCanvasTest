@@ -1,3 +1,3 @@
 import "@css/style.css"
 
-require("./view/39.3d摇篮");
+require("./view/41.3d彩珠");

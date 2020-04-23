@@ -200,9 +200,9 @@ function init() {
             }
         })
 
-        scene.simulate(undefined, 1);
-        renderer.render(scene, camera);
         requestAnimationFrame(run);
+        renderer.render(scene, camera);
+        scene.simulate(undefined, 1);
     })();
 
     function initStats(type = 0) {
