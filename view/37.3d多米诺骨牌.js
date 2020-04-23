@@ -69,8 +69,8 @@ function init() {
     scene.setGravity(new THREE.Vector3(0, -100, 0));
     createGroundAndWalls();
     let points = getPoints();
-    var stones = [];
-    var colors = ["#2d85f0","#f4433c","#ffbc32","#0aa858"];
+    let stones = [];
+    let colors = ["#2d85f0","#f4433c","#ffbc32","#0aa858"];
     points.forEach((point, index)=>{
         let stoneGeom = new THREE.BoxGeometry(0.5, 6, 2);
         let stone = new Physijs.BoxMesh(stoneGeom, Physijs.createMaterial(new THREE.MeshStandardMaterial({
