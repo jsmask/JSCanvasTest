@@ -76,7 +76,7 @@ function init() {
 
     function ceatePointBalls(){
         let colors = ["#2d85f0", "#f4433c", "#ffbc32", "#0aa858"];
-        let count = 36;
+        let count = 24;
         let r = 0.5;
         let geometry = new THREE.SphereGeometry(r,10,10);
 
@@ -85,7 +85,7 @@ function init() {
                 color:new THREE.Color(colors[i%colors.length]),
                 roughnessMap:new THREE.TextureLoader().load(roughness_map),
                 metalness:.3,
-                roughness:.8
+                roughness:.6
             }),0,0);
             let ball = new Physijs.SphereMesh(geometry,material);
             ball.position.y = 10;
