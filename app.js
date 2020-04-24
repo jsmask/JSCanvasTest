@@ -1,3 +1,3 @@
 import "@css/style.css"
 
-require("./view/41.3d彩珠");
+require("./view/42.3d弹珠");
