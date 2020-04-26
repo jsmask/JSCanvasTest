@@ -31,6 +31,7 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
+    "babylonjs": "^4.1.0",
     "three": "^0.115.0",
     "three-obj-mtl-loader": "^1.0.3",
     "tween": "^0.9.0"
