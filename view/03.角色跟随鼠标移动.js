@@ -38,6 +38,7 @@ import img_fish1 from '@images/fish1.png';
 
     ;(function run(){
         window.requestAnimationFrame(run);
+        ctx.clearRect(0,0,w,h);
         bg.draw(img_bg);
         drawFish();
     }());
